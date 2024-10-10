@@ -5,6 +5,8 @@ import { UsersModule } from './modules/users/users.module';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { ShopCartModule } from './modules/shop-cart/shop-cart.module';
+import { LinesModule } from './modules/lines/lines.module';
+import { SubLinesModule } from './modules/sub-lines/sub-lines.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { ShopCartModule } from './modules/shop-cart/shop-cart.module';
     CategoriesModule,
     OrdersModule,
     ShopCartModule,
+    LinesModule,
+    SubLinesModule,
   ],
   providers: [],
 })
