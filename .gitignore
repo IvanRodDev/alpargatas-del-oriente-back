@@ -1,5 +1,6 @@
 #another ignore
 /postgres_data
+/migrations
 
 # compiled output
 /dist
