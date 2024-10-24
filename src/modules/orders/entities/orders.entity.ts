@@ -11,7 +11,7 @@ export class Orders {
   @Column({ type: 'integer' })
   code: number;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'integer'})
   totalAmount: number;
 
   @OneToOne(() => ShopCart, (shopcart) => shopcart.orders)
