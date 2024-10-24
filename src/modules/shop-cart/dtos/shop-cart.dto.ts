@@ -1,8 +1,7 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class CreateShopCartDto {
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
   readonly code: number;
-
 }
