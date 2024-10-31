@@ -1,5 +1,4 @@
 import { Lines } from 'src/modules/lines/entities/lines.entity';
-import { Products } from 'src/modules/products/entities/products.entity';
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne, CreateDateColumn, ManyToMany, JoinTable,} from 'typeorm';
 
 @Entity()
