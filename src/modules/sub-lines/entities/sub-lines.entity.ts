@@ -1,6 +1,6 @@
 import { Lines } from 'src/modules/lines/entities/lines.entity';
 import { Products } from 'src/modules/products/entities/products.entity';
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class SubLines {
@@ -16,9 +16,9 @@ export class SubLines {
   @Column({ type: 'varchar', length: 255 })
   image: string
 
-  @ManyToMany(()=> Lines,(lines)=>lines.subLines)
+  @ManyToOne(()=> Lines,(lines)=>lines.subLines)
   lines: Lines[]
 
-  @ManyToMany(()=>Products,(products)=>products.subLines)
+  @OneToMany(()=>Products,(products)=>products.subLines)
   products: Products[]
 }
