@@ -11,7 +11,7 @@ export class ShopCart {
   code: number;
 
   @OneToOne(() => Orders, (orders) => orders.shopCart)
-  @JoinColumn() // decorador para la llave foranea
+  @JoinColumn({ name: 'ordersId' })
   orders: Orders;
 
   @OneToOne(() => Users, (users) => users.shopCart)
