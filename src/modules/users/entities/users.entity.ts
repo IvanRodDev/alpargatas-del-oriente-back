@@ -34,6 +34,6 @@ export class Users {
   phone: number;
 
   @OneToOne(() => ShopCart, (shopCart) => shopCart.users)
-  @JoinColumn()
+  @JoinColumn({name:"shopCartId"})
   shopCart: ShopCart;
 }
