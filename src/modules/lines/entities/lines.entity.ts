@@ -1,7 +1,7 @@
 import { Categories } from 'src/modules/categories/entities/categories.entity';
 import { Products } from 'src/modules/products/entities/products.entity';
 import { SubLines } from 'src/modules/sub-lines/entities/sub-lines.entity';
-import {  Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, Entity, JoinTable, } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, OneToMany, Entity, ManyToOne, JoinColumn, ManyToMany, } from 'typeorm';
 
 @Entity()
 export class Lines {
@@ -9,34 +9,23 @@ export class Lines {
   idLine: number;
 
   @Column({ type: 'varchar', length: 255 })
-  name: string
+  name: string;
 
   @Column({ type: 'varchar', length: 255 })
-  description: string
+  description: string;
 
   @Column({ type: 'varchar', length: 255 })
-  image: string
+  image: string;
 
-  //Relacion N:N lineas a Sublineas
-  @ManyToMany(()=> SubLines,(subLines)=>subLines.lines)
-  @JoinTable({
-    name:"Lines_SubLines",
-    joinColumn:{
-        name:"line_id",
-        referencedColumnName:"idLine"
-    },
-    inverseJoinColumn:{
-        name:"subLines_id",
-        referencedColumnName:"idSubLine"
-    }
-})
-  subLines: SubLines[]
+  //Relacion Lines-Categories
+  @ManyToMany(() => Categories, (categories) => categories.lines)
+  categories: Categories[];
 
-  //Relacion N:N 
-  @ManyToMany(()=>Products,(products)=>products.lines)
-  products: Products[]
+  //Relacion 1:N lineas a Sublineas
+  @OneToMany(() => SubLines, (subLines) => subLines.lines)
+  subLines: SubLines[];
 
-  //Relacion N:N Lines-Products
-  @ManyToMany(()=>Categories,(categories)=>categories.lines)
-  categories: Categories[]
+  //Relacion 1:N Lineas-Productos
+  @OneToMany(() => Products, (products) => products.lines)
+  products: Products[];
 }
