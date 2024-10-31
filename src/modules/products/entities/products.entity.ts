@@ -1,7 +1,7 @@
 import { Lines } from 'src/modules/lines/entities/lines.entity';
 import { Orders } from 'src/modules/orders/entities/orders.entity';
 import { SubLines } from 'src/modules/sub-lines/entities/sub-lines.entity';
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, ManyToMany, JoinTable,} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, JoinColumn} from 'typeorm';
 
 @Entity()
 export class Products {
@@ -35,36 +35,18 @@ export class Products {
   @CreateDateColumn({ type: 'timestamp' })
   createAt: Date;
 
+  //Relacion products-orders
   @ManyToOne(() => Orders, (orders) => orders.products)
+  @JoinColumn({ name: 'ordersId' })
   orders: Orders;
 
-  //Relacion N:N products-lines
-  @ManyToMany(() => Lines, (lines) => lines.products)
-  @JoinTable({
-    name: 'Products_Lines',
-    joinColumn: {
-      name: 'product_id',
-      referencedColumnName: 'idProduct',
-    },
-    inverseJoinColumn: {
-      name: 'line_id',
-      referencedColumnName: 'idLine',
-    },
-  })
+  //Relacion products-lines
+  @ManyToOne(() => Lines, (lines) => lines.products)
+  @JoinColumn({ name: 'lineId' })
   lines: Lines[];
 
-  //Relacion N:N products-SubLines
-  @ManyToMany(() => SubLines, (subLines) => subLines.products)
-  @JoinTable({
-    name: 'Products_SubLines',
-    joinColumn: {
-      name: 'product_id',
-      referencedColumnName:"idProduct"
-    },
-    inverseJoinColumn: {
-      name: 'SubLine_id',
-      referencedColumnName:"idSubLine"
-    },
-  })
+  //Relacion products-SubLines
+  @ManyToOne(() => SubLines, (subLines) => subLines.products)
+  @JoinColumn({ name: 'subLineId' })
   subLines: SubLines[];
 }
